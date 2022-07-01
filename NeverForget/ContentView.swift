@@ -28,7 +28,7 @@ struct ContentView: View {
                 LazyVGrid(columns: columns, alignment: .center, spacing: 20) {
                     ForEach(photos.items.sorted()) { photo in
                         NavigationLink(
-                            destination: PhotoDetails(photo: photo).environmentObject(photos),
+                            destination: PhotoDetailsView(photo: photo).environmentObject(photos),
                             label: {
                                 HStack {
                                     ZStack(alignment: .bottomLeading) {
@@ -37,12 +37,21 @@ struct ContentView: View {
                                             .frame(minWidth: 0, maxWidth: .infinity, minHeight: 50, maxHeight: 200)
                                             .cornerRadius(15)
                                         Text(photo.name)
-                                            .font(.caption)
+                                            .font(photo.name.count > 8 ? .caption : .title)
                                             .fontWeight(.black)
                                             .padding(10)
                                             .foregroundColor(.white)
                                             .shadow(radius: 15)
                                             .offset(x: -5, y: -5)
+                                            .alert("Are you sure you want to delete this photo?", isPresented: $showDeleteAlert) {
+                                                Button("Cancel", role: .cancel) {
+                                                    showDeleteAlert = false
+                                                }
+                                                Button("Delete", role: .destructive) {
+                                                    //TODO: This doesn't delete the photo at the correct index
+                                                    deletePhoto(photo: photo)
+                                                }
+                                            }
                                         if showingEditor {
                                             Button () {
                                                 showDeleteAlert = true
@@ -58,14 +67,6 @@ struct ContentView: View {
                                     }
                                 }
                             })
-                        .alert("Are you sure you want to delete this photo?", isPresented: $showDeleteAlert) {
-                            Button("Cancel", role: .cancel) {
-                                showDeleteAlert = false
-                            }
-                            Button("Delete", role: .destructive) {
-                                deletePhoto(photo: photo)
-                            }
-                        }
                     }
                 }
                 .padding()
@@ -80,8 +81,7 @@ struct ContentView: View {
                 
                 trailing: Button("Add") {
                     showingEditor = false
-                    showImagePicker = true
-                }
+                    showImagePicker = true                }
                 
                 .sheet(isPresented: $showImagePicker, onDismiss: loadImage) {
                     ImagePicker(image: $newImage)
@@ -96,10 +96,12 @@ struct ContentView: View {
     }
     
     func deletePhoto(photo: Photo) {
-        let photoIndex = photos.items.firstIndex(where: { $0.id == photo.id })
-        if let photoIndex = photoIndex {
+        if let photoIndex = photos.items.firstIndex(where: { $0.id == photo.id }) {
             photos.items[photoIndex].deleteFromSecureDirectory()
             photos.items.remove(at: photoIndex)
+        }
+        if photos.items.isEmpty {
+            showingEditor = false
         }
     }
     

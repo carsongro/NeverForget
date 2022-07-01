@@ -13,7 +13,7 @@ struct LocationPin: Identifiable {
     let coordinate: CLLocationCoordinate2D
 }
 
-struct PhotoDetails: View {
+struct PhotoDetailsView: View {
     
     var photo: Photo
     @State private var newImageName = ""
