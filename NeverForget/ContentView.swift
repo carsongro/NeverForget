@@ -15,6 +15,7 @@ struct ContentView: View {
     @State private var showNameImage = false
     @State private var showingEditor = false
     @State private var showDeleteAlert = false
+    @State private var tappedPhoto = Photo(name: "")
     let locationFetcher = LocationFetcher()
     
     let columns = [
@@ -48,13 +49,13 @@ struct ContentView: View {
                                                     showDeleteAlert = false
                                                 }
                                                 Button("Delete", role: .destructive) {
-                                                    //TODO: This doesn't delete the photo at the correct index
-                                                    deletePhoto(photo: photo)
+                                                    deletePhoto(photo: tappedPhoto)
                                                 }
                                             }
                                         if showingEditor {
                                             Button () {
                                                 showDeleteAlert = true
+                                                tappedPhoto = photo
                                             } label: {
                                                 Image(systemName: "trash.circle.fill")
                                                     .resizable()
