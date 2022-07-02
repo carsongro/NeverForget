@@ -33,10 +33,12 @@ struct ContentView: View {
                             label: {
                                 HStack {
                                     ZStack(alignment: .bottomLeading) {
-                                        photo.image?
-                                            .resizable()
-                                            .frame(minWidth: 0, maxWidth: .infinity, minHeight: 50, maxHeight: 200)
-                                            .cornerRadius(15)
+                                        if !showingEditor {
+                                            photo.image?
+                                                .resizable()
+                                                .frame(minWidth: 0, maxWidth: .infinity, minHeight: 50, maxHeight: 200)
+                                                .cornerRadius(15)
+
                                         Text(photo.name)
                                             .font(photo.name.count > 8 ? .caption : .title)
                                             .fontWeight(.black)
@@ -52,17 +54,26 @@ struct ContentView: View {
                                                     deletePhoto(photo: tappedPhoto)
                                                 }
                                             }
-                                        if showingEditor {
+                                        } else {
                                             Button () {
                                                 showDeleteAlert = true
                                                 tappedPhoto = photo
                                             } label: {
-                                                Image(systemName: "trash.circle.fill")
-                                                    .resizable()
-                                                    .frame(width: 50, height: 50)
-                                                    .foregroundColor(.red)
-                                                    .shadow(radius: 15)
-                                                    .frame(minWidth: 0, maxWidth: .infinity, minHeight: 50, maxHeight: 200)
+                                                ZStack {
+                                                    photo.image?
+                                                        .resizable()
+                                                        .frame(minWidth: 0, maxWidth: .infinity, minHeight: 50, maxHeight: 200)
+                                                        .cornerRadius(15)
+                                                        .wiggling()
+                                                    
+                                                    Image(systemName: "trash.circle.fill")
+                                                        .resizable()
+                                                        .frame(width: 50, height: 50)
+                                                        .foregroundColor(.red)
+                                                        .shadow(radius: 15)
+                                                        .frame(minWidth: 0, maxWidth: .infinity, minHeight: 50, maxHeight: 200)
+                                                        .wiggling()
+                                                }
                                             }
                                         }
                                     }
