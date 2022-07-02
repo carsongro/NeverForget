@@ -49,6 +49,7 @@ struct ContentView: View {
                                             .alert("Are you sure you want to delete this photo?", isPresented: $showDeleteAlert) {
                                                 Button("Cancel", role: .cancel) {
                                                     showDeleteAlert = false
+                                                    showingEditor = true
                                                 }
                                                 Button("Delete", role: .destructive) {
                                                     deletePhoto(photo: tappedPhoto)
@@ -58,13 +59,13 @@ struct ContentView: View {
                                             Button () {
                                                 showDeleteAlert = true
                                                 tappedPhoto = photo
+                                                showingEditor = false
                                             } label: {
                                                 ZStack {
                                                     photo.image?
                                                         .resizable()
                                                         .frame(minWidth: 0, maxWidth: .infinity, minHeight: 50, maxHeight: 200)
                                                         .cornerRadius(15)
-                                                        .wiggling()
                                                     
                                                     Image(systemName: "trash.circle.fill")
                                                         .resizable()
@@ -72,9 +73,9 @@ struct ContentView: View {
                                                         .foregroundColor(.red)
                                                         .shadow(radius: 15)
                                                         .frame(minWidth: 0, maxWidth: .infinity, minHeight: 50, maxHeight: 200)
-                                                        .wiggling()
                                                 }
                                             }
+                                            .wiggling()
                                         }
                                     }
                                 }
@@ -115,6 +116,7 @@ struct ContentView: View {
         if photos.items.isEmpty {
             showingEditor = false
         }
+        showingEditor = true
     }
     
     func saveImage() {
