@@ -20,6 +20,7 @@
 		B5867BD7286CE7F400C72865 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5867BD6286CE7F400C72865 /* Photo.swift */; };
 		B5867BE1286CF51400C72865 /* PhotoDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5867BE0286CF51400C72865 /* PhotoDetailsView.swift */; };
 		B5AE815C2870DB9100CB96BA /* Wiggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AE815B2870DB9100CB96BA /* Wiggle.swift */; };
+		B5FE1CAE2871E98700C04FA8 /* PhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FE1CAD2871E98700C04FA8 /* PhotoView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +38,7 @@
 		B5867BD6286CE7F400C72865 /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 		B5867BE0286CF51400C72865 /* PhotoDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDetailsView.swift; sourceTree = "<group>"; };
 		B5AE815B2870DB9100CB96BA /* Wiggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wiggle.swift; sourceTree = "<group>"; };
+		B5FE1CAD2871E98700C04FA8 /* PhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +73,7 @@
 			children = (
 				B5867BC0286CDC2300C72865 /* NeverForgetApp.swift */,
 				B5867BC2286CDC2300C72865 /* ContentView.swift */,
+				B5FE1CAD2871E98700C04FA8 /* PhotoView.swift */,
 				B5AE815B2870DB9100CB96BA /* Wiggle.swift */,
 				B54F910A286E3F9D00C3A9A4 /* LocationFetcher.swift */,
 				B54F9114286E639B00C3A9A4 /* EditPhotoNameView.swift */,
@@ -167,6 +170,7 @@
 				B5867BD7286CE7F400C72865 /* Photo.swift in Sources */,
 				B5867BE1286CF51400C72865 /* PhotoDetailsView.swift in Sources */,
 				B5867BC3286CDC2300C72865 /* ContentView.swift in Sources */,
+				B5FE1CAE2871E98700C04FA8 /* PhotoView.swift in Sources */,
 				B5867BD1286CE0FC00C72865 /* ImagePicker.swift in Sources */,
 				B54F9115286E639B00C3A9A4 /* EditPhotoNameView.swift in Sources */,
 				B54F9113286E636900C3A9A4 /* PhotoCollection.swift in Sources */,

@@ -34,27 +34,7 @@ struct ContentView: View {
                                 HStack {
                                     ZStack(alignment: .bottomLeading) {
                                         if !showingEditor {
-                                            photo.image?
-                                                .resizable()
-                                                .frame(minWidth: 0, maxWidth: .infinity, minHeight: 50, maxHeight: 200)
-                                                .cornerRadius(15)
-
-                                        Text(photo.name)
-                                            .font(photo.name.count > 8 ? .caption : .title)
-                                            .fontWeight(.black)
-                                            .padding(10)
-                                            .foregroundColor(.white)
-                                            .shadow(radius: 15)
-                                            .offset(x: -5, y: -5)
-                                            .alert("Are you sure you want to delete this photo?", isPresented: $showDeleteAlert) {
-                                                Button("Cancel", role: .cancel) {
-                                                    showDeleteAlert = false
-                                                    showingEditor = true
-                                                }
-                                                Button("Delete", role: .destructive) {
-                                                    deletePhoto(photo: tappedPhoto)
-                                                }
-                                            }
+                                            PhotoView(photo: photo, showingEditor: showingEditor)
                                         } else {
                                             Button () {
                                                 showDeleteAlert = true
@@ -62,21 +42,20 @@ struct ContentView: View {
                                                 showingEditor = false
                                             } label: {
                                                 ZStack {
-                                                    photo.image?
-                                                        .resizable()
-                                                        .frame(minWidth: 0, maxWidth: .infinity, minHeight: 50, maxHeight: 200)
-                                                        .cornerRadius(15)
-                                                    
-                                                    Image(systemName: "trash.circle.fill")
-                                                        .resizable()
-                                                        .frame(width: 50, height: 50)
-                                                        .foregroundColor(.red)
-                                                        .shadow(radius: 15)
-                                                        .frame(minWidth: 0, maxWidth: .infinity, minHeight: 50, maxHeight: 200)
+                                                    PhotoView(photo: photo, showingEditor: showingEditor)
                                                 }
                                             }
                                             .wiggling()
                                         }
+                                    }
+                                }
+                                .alert("Are you sure you want to delete this photo?", isPresented: $showDeleteAlert) {
+                                    Button("Cancel", role: .cancel) {
+                                        showDeleteAlert = false
+                                        showingEditor = true
+                                    }
+                                    Button("Delete", role: .destructive) {
+                                        deletePhoto(photo: tappedPhoto)
                                     }
                                 }
                             })
@@ -115,8 +94,9 @@ struct ContentView: View {
         }
         if photos.items.isEmpty {
             showingEditor = false
+        } else {
+            showingEditor = true
         }
-        showingEditor = true
     }
     
     func saveImage() {
